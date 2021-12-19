@@ -434,7 +434,7 @@ typedef struct lhp_ctx lhp_ctx_t;
 LWS_VISIBLE LWS_EXTERN int
 lws_dlo_ss_find(struct lws_context *cx, const char *url, lws_dlo_image_t *u);
 
-LWS_VISIBLE LWS_EXTERN signed char
+LWS_VISIBLE LWS_EXTERN lws_stateful_ret_t
 lhp_displaylist_layout(lhp_ctx_t *ctx, char reason);
 
 #define lws_dlo_image_width(_u) ((_u)->failed ? -1 : \
