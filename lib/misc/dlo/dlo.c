@@ -149,10 +149,14 @@ lws_display_dl_dump(lws_displaylist_t *dl)
 					(unsigned int)dlo->dc, (unsigned int)text->text_len,
 					(int)text->text_len, text->text ? text->text : "(empty)");
 		}
+#if defined(LWS_WITH_NETWORK) && defined(LWS_WITH_UPNG) && defined(LWS_WITH_CLIENT)
 		else if (dlo->_destroy == lws_display_dlo_png_destroy)
 			lws_snprintf(dt, sizeof(dt), "png");
+#endif
+#if defined(LWS_WITH_NETWORK) && defined(LWS_WITH_JPEG) && defined(LWS_WITH_CLIENT)
 		else if (dlo->_destroy == lws_display_dlo_jpeg_destroy)
 			lws_snprintf(dt, sizeof(dt), "jpeg");
+#endif
 
 		lws_fx_string(&dlo->box.x, b[0], sizeof(b[0]));
 		lws_fx_string(&dlo->box.y, b[1], sizeof(b[1]));

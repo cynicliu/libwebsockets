@@ -65,6 +65,9 @@ lws_lhp_image_dimensions_cb(lws_sorted_usec_list_t *sul)
 		lws_sul_schedule(lws_ss_get_context(m->ss), 0, m->ssevsul, m->on_rx, 1);
 		return;
 	}
+
+	/* we are resuming the html parsing */
+	lws_lhp_ss_html_parse_from_lhp(m->lhp);
 }
 
 /* secure streams payload interface */
@@ -133,6 +136,7 @@ dloss_state(void *userobj, void *sh, lws_ss_constate_t state,
 		break;
 
 	case LWSSSCS_DESTROYING:
+		lws_sul_cancel(&m->sul);
 		lws_dll2_remove(&m->active_asset_list);
 		break;
 
@@ -143,7 +147,7 @@ dloss_state(void *userobj, void *sh, lws_ss_constate_t state,
 	return LWSSSSRET_OK;
 }
 
-static LWS_SS_INFO("default", dloss_t)
+static LWS_SS_INFO("__default", dloss_t)
 	.rx				= dloss_rx,
 	.state				= dloss_state
 };
