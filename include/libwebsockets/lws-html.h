@@ -636,6 +636,26 @@ lws_lhp_parse(lhp_ctx_t *ctx, const uint8_t **buf, size_t *len);
 LWS_VISIBLE LWS_EXTERN const lcsp_atr_t *
 lws_css_cascade_get_prop_atr(lhp_ctx_t *ctx, lcsp_props_t prop);
 
+/**
+ * lws_http_rel_to_url() - make absolute url from base and relative
+ *
+ * \param dest: place to store the result
+ * \param len: max length of result including NUL
+ * \param base: a reference url including a file part
+ * \param rel: the absolute or relative url or path to apply to base
+ *
+ * Copy the url formof rel into dest, using base to fill in missing context
+ *
+ * If base is https://x.com/y/z.html
+ *
+ *   a.html               -> https://x.com/y/a/html
+ *   ../b.html            -> https://x.com/b.html
+ *   /c.html              -> https://x.com/c.html
+ *   https://y.com/a.html -> https://y.com/a.html
+ */
+LWS_VISIBLE LWS_EXTERN int
+lws_http_rel_to_url(char *dest, size_t len, const char *base, const char *rel);
+
 LWS_VISIBLE LWS_EXTERN lhp_pstack_t *
 lws_css_get_parent_block(lhp_ctx_t *ctx, lhp_pstack_t *ps);
 
