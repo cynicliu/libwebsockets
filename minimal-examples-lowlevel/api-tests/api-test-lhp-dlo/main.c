@@ -114,6 +114,7 @@ render(lws_sorted_usec_list_t *sul)
 
 	if (!rs->line) {
 
+		lws_display_get_ids_boxes(rs);
 		lws_display_dl_dump(&rs->displaylist);
 
 		/* allocate one line of RGB output pixels to render into */
