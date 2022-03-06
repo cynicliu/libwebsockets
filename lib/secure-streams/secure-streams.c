@@ -1699,6 +1699,7 @@ lws_ss_destroy(lws_ss_handle_t **ppss)
 	 * If any hanging caliper measurement, dump it, and free any tags
 	 */
 	lws_metrics_caliper_report_hist(h->cal_txn, (struct lws *)NULL);
+	lws_metrics_tags_destroy(&h->cal_txn.mtags_owner);
 #endif
 
 	lws_sul_cancel(&h->sul_timeout);
