@@ -119,6 +119,16 @@ and the SSPC layer, allowing a single pipe to carry many separate SS connections
 The user SS code is identical however it is transported, muxed and fulfilled.
 
 
+## Build
+
+install openssl first 
+
+$ cd master
+$ mkdir build
+$ cd build
+$ cmake .. -DLIB_SUFFIX=64 -DLWS_WITH_HTTP2=1 -DLWS_OPENSSL_INCLUDE_DIRS=/usr/include/openssl -DLWS_OPENSSL_LIBRARIES="/usr/lib64/libssl.so;/usr/lib64/libcrypto.so"
+$ make
+
 ## v4.3 is released
 
 See the [changelog](https://libwebsockets.org/git/libwebsockets/tree/changelog)
